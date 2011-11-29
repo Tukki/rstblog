@@ -195,7 +195,7 @@ class Builder(object):
         self.prefix_path = parsed.path
         self.url_adapter = self.url_map.bind('dummy.invalid',
             script_name=self.prefix_path)
-        self.register_url('page', '/<path:slug>')
+        self.register_url('page', '/<path:slug>/')  #auto add slash to page url
 
         template_path = os.path.join(self.project_folder,
             self.config.root_get('template_path') or
