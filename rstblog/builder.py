@@ -11,6 +11,7 @@
 import re
 import os
 import posixpath
+import sys
 from fnmatch import fnmatch
 from urlparse import urlparse
 
@@ -39,17 +40,19 @@ builtin_programs = {
 builtin_templates = os.path.join(os.path.dirname(__file__), 'templates')
 url_parts_re = re.compile(r'\$(\w+|{[^}]+})')
 
+_default_encode = sys.getfilesystemencoding()  
 
 class Context(object):
     """Per rendering information"""
-
+    
     def __init__(self, builder, config, source_filename, prepare=False):
         self.builder = builder
         self.config = config
         self.title = 'Untitled'
         self.summary = None
         self.pub_date = None
-        self.source_filename = source_filename
+        #decode the unicode filenames
+        self.source_filename = source_filename.decode(_default_encode) 
         self.links = []
         self.program_name = self.config.get('program')
         if self.program_name is None:
