@@ -253,11 +253,11 @@ class Builder(object):
         self.url_map.add(Rule(rule, endpoint=key, **extra))
 
     def get_full_static_filename(self, filename):
-        return os.path.join(self.default_output_folder,
+        return os.path.join(self.default_output_folder, self.prefix_path.lstrip('/'),
                             self.static_folder, filename)
 
     def get_static_url(self, filename):
-        return '/' + posixpath.join(self.static_folder, filename)
+        return self.prefix_path + posixpath.join(self.static_folder, filename)
 
     def open_static_file(self, filename, mode='w'):
         full_filename = self.get_full_static_filename(filename)
