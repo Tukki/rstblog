@@ -41,11 +41,11 @@ class CodeBlock(Directive):
 
 
 def inject_stylesheet(context, **kwargs):
-    context.add_stylesheet('_pygments.css')
+    context.add_stylesheet('pygments.css')
 
 
 def write_stylesheet(builder, **kwargs):
-    with builder.open_static_file('_pygments.css', 'w') as f:
+    with builder.open_static_file('pygments.css', 'w') as f:
         f.write(html_formatter.get_style_defs())
 
 
